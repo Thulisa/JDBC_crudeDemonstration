@@ -1,0 +1,19 @@
+<project name="jdbc oracle database" default="getDependencies" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+    <property file="${basedir}/build.properties" />
+
+    <target name="Connect_toDatabase" depends="getDependencies,clean">
+        <echo message = "Database conection... "/>
+    </target>
+
+    <target name="getDependencies" description="retrieve the dependencies and more from the build.xml" depends="clean">
+        <ivy:settings url="http://artifactory.cpt.intecbilling.com/ivy/ivysettings.xml"/>
+        <ivy:resolve file="${basedir}/ivy_dependencies.xml"/>
+        <ivy:retrieve type="jar,bundle" pattern="${basedir}/${lib.folder}/[artifact].[ext]" ivypattern="${basedir}/${lib.folder}/[artifact].[ext]"/>
+    </target>
+
+    <target name="clean" description="delete the lib folder">
+        <delete dir="${basedir}/lib" />
+    </target>
+
+</project>
